@@ -1,0 +1,52 @@
+import axios from "axios";
+import axiosRateLimit from "axios-rate-limit";
+
+const MET_BASE_URL = "https://collectionapi.metmuseum.org/public/collection/v1";
+
+const axiosWithLimit = axiosRateLimit(axios, {
+  maxRequests: 10,
+  perMilliseconds: 1000,
+});
+
+export const fetchMetArtworks = async (page, itemsPerPage) => {
+  try {
+    const response = await axiosWithLimit.get(`${MET_BASE_URL}/search`, {
+      params: {
+        isPublicDomain: true,
+        hasImages: true,
+        isOnView: true,
+        q: "met",
+      },
+    });
+
+    const allIds = response.data.objectIDs;
+    if (!allIds || allIds.length === 0) {
+      return [];
+    }
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedIds = allIds.slice(startIndex, endIndex);
+
+    const objectsData = await Promise.all(
+      paginatedIds.map((id) =>
+        axiosWithLimit
+          .get(`${MET_BASE_URL}/objects/${id}`)
+          .then((res) => res.data)
+      )
+    );
+
+    const metArtworks = objectsData.map((artwork) => ({
+      image:
+        artwork.primaryImageSmall || artwork.primaryImage || "/placeholder.png",
+      title: artwork.title,
+      artist: artwork.artistDisplayName || "Artist Unknown",
+      date: artwork.objectDate || "Date Unknown",
+    }));
+
+    return metArtworks;
+  } catch (error) {
+    console.error("Error fetching MET artworks:", error);
+    throw error;
+  }
+};
