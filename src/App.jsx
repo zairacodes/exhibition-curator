@@ -8,13 +8,15 @@ import MyExhibitions from "./pages/MyExhibitions";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/myexhibitions" element={<MyExhibitions />} />
-      </Routes>
-      <Footer />
+      <div className="app">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/myexhibitions" element={<MyExhibitions />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
