@@ -1,6 +1,8 @@
 import axios from "axios";
 import axiosRateLimit from "axios-rate-limit";
 
+const MET_MUSEUM_NAME =
+  "The Metropolitan Museum of Art – New York, United States";
 const MET_BASE_URL = "https://collectionapi.metmuseum.org/public/collection/v1";
 
 const axiosWithLimit = axiosRateLimit(axios, {
@@ -8,8 +10,34 @@ const axiosWithLimit = axiosRateLimit(axios, {
   perMilliseconds: 1000,
 });
 
-export const fetchMetArtworks = async (page, itemsPerPage, query = "") => {
+export const fetchMetArtworks = async (
+  page,
+  itemsPerPage,
+  query = "",
+  id = null
+) => {
   try {
+    if (id) {
+      const response = await axiosWithLimit.get(
+        `${MET_BASE_URL}/objects/${id}`
+      );
+      const artwork = response.data;
+      return {
+        id: artwork.objectID,
+        image:
+          artwork.primaryImageSmall ||
+          artwork.primaryImage ||
+          "/placeholder.png",
+        title: artwork.title || "Title Unknown",
+        artist: artwork.artistDisplayName || "Artist Unknown",
+        date: artwork.objectDate || "Date Unknown",
+        medium: artwork.medium || "Medium Unknown",
+        dimensions: artwork.dimensions || "Dimensions Unknown",
+        credit: artwork.creditLine || "Credit Information Not Available",
+        museum: MET_MUSEUM_NAME,
+      };
+    }
+
     const response = await axiosWithLimit.get(`${MET_BASE_URL}/search`, {
       params: {
         isPublicDomain: true,
@@ -37,9 +65,11 @@ export const fetchMetArtworks = async (page, itemsPerPage, query = "") => {
     );
 
     const metArtworks = objectsData.map((artwork) => ({
+      id: artwork.objectID,
+      source: "met",
       image:
         artwork.primaryImageSmall || artwork.primaryImage || "/placeholder.png",
-      title: artwork.title,
+      title: artwork.title || "Title Unknown",
       artist: artwork.artistDisplayName || "Artist Unknown",
       date: artwork.objectDate || "Date Unknown",
     }));
