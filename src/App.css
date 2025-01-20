@@ -83,6 +83,16 @@ footer a {
   gap: 1.5rem;
 }
 
+.artwork-item a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .artwork-item {
   width: 100%;
   max-width: 800px;
@@ -128,6 +138,41 @@ footer a {
   margin: 0.5rem 0;
   color: #555;
   font-size: 1rem;
+}
+
+/* Individual artwork */
+.artwork-detail {
+  display: flex;
+  margin: 2rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.artwork-detail img {
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+}
+
+.artwork-detail .details {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.artwork-detail .details h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.artwork-detail .details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.artwork-detail .details p {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
 }
 
 /* Pagination */

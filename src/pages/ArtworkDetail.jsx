@@ -36,14 +36,16 @@ const ArtworkDetail = () => {
   return (
     <section className="artwork-detail">
       <img src={artwork.image} alt={artwork.title} />
-      <h1>{artwork.title}</h1>
-      <p>{artwork.artist}</p>
-      <p>{artwork.date}</p>
-      <p>{artwork.medium}</p>
-      <p>{artwork.dimensions}</p>
-      <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
-      <p>{artwork.credit}</p>
-      <p>{artwork.museum}</p>
+      <div className="details">
+        <h1>{artwork.title}</h1>
+        <h2>{artwork.artist}</h2>
+        <h2>{artwork.date}</h2>
+        <p>{artwork.medium}</p>
+        <p>{artwork.dimensions}</p>
+        <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+        <p>{artwork.credit}</p>
+        <p>{artwork.museum}</p>
+      </div>
     </section>
   );
 };
