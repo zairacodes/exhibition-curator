@@ -4,6 +4,7 @@ import { fetchMetArtworks } from "../utils/metApi";
 import { fetchAicArtworks } from "../utils/aicApi";
 import ArtworkList from "../components/ArtworkList";
 import SearchBar from "../components/SearchBar";
+import Error from "./Error";
 
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
@@ -20,13 +21,16 @@ const Home = () => {
     const pageFromParams = +(searchParams.get("page") || 1);
     if (isNaN(pageFromParams) || pageFromParams <= 0) {
       setError("Invalid page number.");
+      navigate("/error");
       return;
     }
     setCurrentPage(pageFromParams);
+    setError(null);
   }, [searchParams]);
 
   const fetchArtworks = async (page, query = "") => {
     setLoading(true);
+    setError(null);
     try {
       if (cache.current[`${page}-${query}`]) {
         setArtworks(cache.current[`${page}-${query}`]);
@@ -37,14 +41,12 @@ const Home = () => {
 
         if (combinedArtworks.length === 0) {
           if (query) {
-            // Query exists but no artworks
             if (page > 1) {
               setError(`No page ${page} found for query "${query}".`);
             } else {
               setError(`No artworks found for query "${query}".`);
             }
           } else {
-            // No query and page doesn't exist
             setError(`Page ${page} not found.`);
           }
           setArtworks([]);
@@ -54,7 +56,7 @@ const Home = () => {
         }
       }
     } catch (err) {
-      setError("Error fetching artworks. Please try again later.");
+      setError("Error fetching artworks.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -89,8 +91,10 @@ const Home = () => {
   };
 
   const handlePrevious = () => {
-    const previousPage = Math.max(currentPage - 1, 1);
-    navigate(`/?page=${previousPage}&query=${searchQuery}`);
+    if (!error) {
+      const previousPage = Math.max(currentPage - 1, 1);
+      navigate(`/?page=${previousPage}&query=${searchQuery}`);
+    }
   };
 
   useEffect(() => {
@@ -99,7 +103,7 @@ const Home = () => {
   }, [currentPage, searchQuery]);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <Error error={error} />;
 
   return (
     <div className="homepage">
@@ -108,11 +112,16 @@ const Home = () => {
       <div>Filter by collection</div>
       <ArtworkList artworks={artworks} />
       <div className="pagination">
-        <button onClick={handlePrevious} disabled={currentPage === 1}>
+        <button
+          onClick={handlePrevious}
+          disabled={currentPage === 1 || !!error}
+        >
           Previous
         </button>
         <span>Page {currentPage}</span>
-        <button onClick={handleNext}>Next</button>
+        <button onClick={handleNext} disabled={!!error}>
+          Next
+        </button>
       </div>
     </div>
   );
