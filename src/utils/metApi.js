@@ -8,14 +8,14 @@ const axiosWithLimit = axiosRateLimit(axios, {
   perMilliseconds: 1000,
 });
 
-export const fetchMetArtworks = async (page, itemsPerPage) => {
+export const fetchMetArtworks = async (page, itemsPerPage, query = "") => {
   try {
     const response = await axiosWithLimit.get(`${MET_BASE_URL}/search`, {
       params: {
         isPublicDomain: true,
         hasImages: true,
         isOnView: true,
-        q: "met",
+        q: query || "met",
       },
     });
 

@@ -9,17 +9,27 @@ const axiosWithLimit = axiosRateLimit(axios, {
   perMilliseconds: 1000,
 });
 
-export const fetchAicArtworks = async (page, itemsPerPage) => {
+export const fetchAicArtworks = async (page, itemsPerPage, query = "") => {
   try {
-    const response = await axiosWithLimit.get(AIC_BASE_URL, {
-      params: {
-        page,
-        limit: itemsPerPage,
-        fields: "id,title,image_id,date_display,artist_title",
-        has_images: 1,
-        is_public_domain: true,
-      },
-    });
+    const endpoint = query.trim() ? `${AIC_BASE_URL}/search` : AIC_BASE_URL;
+
+    const params = {
+      page,
+      limit: itemsPerPage,
+      fields: "id,title,image_id,date_display,artist_title",
+      has_images: 1,
+      is_public_domain: true,
+    };
+
+    if (query.trim()) {
+      params.q = query.trim();
+    }
+
+    const response = await axiosWithLimit.get(endpoint, { params });
+
+    if (!response.data?.data) {
+      return [];
+    }
 
     const aicArtworks = response.data.data.map((artwork) => ({
       image: artwork.image_id
