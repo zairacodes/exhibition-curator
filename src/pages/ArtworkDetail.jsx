@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
+import DOMPurify from "dompurify";
 import { fetchArtworkById } from "../utils/artworkApi";
 import Error from "./Error";
 
@@ -30,6 +31,8 @@ const ArtworkDetail = () => {
   if (loading) return <div>Loading artwork details...</div>;
   if (error) return <Error error={error} />;
 
+  const sanitizedDescription = DOMPurify.sanitize(artwork.description);
+
   return (
     <section className="artwork-detail">
       <img src={artwork.image} alt={artwork.title} />
@@ -38,7 +41,7 @@ const ArtworkDetail = () => {
       <p>{artwork.date}</p>
       <p>{artwork.medium}</p>
       <p>{artwork.dimensions}</p>
-      <p>{artwork.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
       <p>{artwork.credit}</p>
       <p>{artwork.museum}</p>
     </section>
