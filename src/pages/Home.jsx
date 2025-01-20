@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router";
 import { fetchMetArtworks } from "../utils/metApi";
 import { fetchAicArtworks } from "../utils/aicApi";
 import ArtworkList from "../components/ArtworkList";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
   const itemsPerPage = 5;
   const cache = useRef({});
   const navigate = useNavigate();
+  const searchQuery = searchParams.get("query")?.trim() || "";
 
   useEffect(() => {
     const pageFromParams = +(searchParams.get("page") || 1);
@@ -23,19 +25,31 @@ const Home = () => {
     setCurrentPage(pageFromParams);
   }, [searchParams]);
 
-  const fetchArtworks = async (page) => {
+  const fetchArtworks = async (page, query = "") => {
     setLoading(true);
     try {
-      if (cache.current[page]) {
-        setArtworks(cache.current[page]);
+      if (cache.current[`${page}-${query}`]) {
+        setArtworks(cache.current[`${page}-${query}`]);
       } else {
-        const metArtworks = await fetchMetArtworks(page, itemsPerPage);
-        const aicArtworks = await fetchAicArtworks(page, itemsPerPage);
+        const metArtworks = await fetchMetArtworks(page, itemsPerPage, query);
+        const aicArtworks = await fetchAicArtworks(page, itemsPerPage, query);
         const combinedArtworks = [...metArtworks, ...aicArtworks];
+
         if (combinedArtworks.length === 0) {
-          setError("No artworks found on this page.");
+          if (query) {
+            // Query exists but no artworks
+            if (page > 1) {
+              setError(`No page ${page} found for query "${query}".`);
+            } else {
+              setError(`No artworks found for query "${query}".`);
+            }
+          } else {
+            // No query and page doesn't exist
+            setError(`Page ${page} not found.`);
+          }
+          setArtworks([]);
         } else {
-          cache.current[page] = combinedArtworks;
+          cache.current[`${page}-${query}`] = combinedArtworks;
           setArtworks(combinedArtworks);
         }
       }
@@ -47,15 +61,15 @@ const Home = () => {
     }
   };
 
-  const prefetchNextPages = async (page) => {
+  const prefetchNextPages = async (page, query = "") => {
     const nextPages = [page + 1, page + 2];
     nextPages.forEach(async (p) => {
-      if (!cache.current[p]) {
+      if (!cache.current[`${p}-${query}`]) {
         try {
-          const metArtworks = await fetchMetArtworks(p, itemsPerPage);
-          const aicArtworks = await fetchAicArtworks(p, itemsPerPage);
+          const metArtworks = await fetchMetArtworks(p, itemsPerPage, query);
+          const aicArtworks = await fetchAicArtworks(p, itemsPerPage, query);
           const combinedArtworks = [...metArtworks, ...aicArtworks];
-          cache.current[p] = combinedArtworks;
+          cache.current[`${p}-${query}`] = combinedArtworks;
         } catch (err) {
           console.error("Error prefetching artworks:", err);
         }
@@ -63,22 +77,26 @@ const Home = () => {
     });
   };
 
-  useEffect(() => {
-    if (!error) {
-      fetchArtworks(currentPage);
-      prefetchNextPages(currentPage);
-    }
-  }, [currentPage, error]);
+  const handleSearch = (query) => {
+    setSearchParams({ page: 1, query });
+  };
 
   const handleNext = () => {
-    const nextPage = currentPage + 1;
-    navigate(`/?page=${nextPage}`);
+    if (!error) {
+      const nextPage = currentPage + 1;
+      navigate(`/?page=${nextPage}&query=${searchQuery}`);
+    }
   };
 
   const handlePrevious = () => {
     const previousPage = Math.max(currentPage - 1, 1);
-    navigate(`/?page=${previousPage}`);
+    navigate(`/?page=${previousPage}&query=${searchQuery}`);
   };
+
+  useEffect(() => {
+    fetchArtworks(currentPage, searchQuery);
+    prefetchNextPages(currentPage, searchQuery);
+  }, [currentPage, searchQuery]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -86,7 +104,7 @@ const Home = () => {
   return (
     <div className="homepage">
       <h1>Artworks</h1>
-      <div>Search bar</div>
+      <SearchBar onSearch={handleSearch} />
       <div>Filter by collection</div>
       <ArtworkList artworks={artworks} />
       <div className="pagination">
