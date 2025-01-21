@@ -7,10 +7,8 @@ const ArtworkList = ({ artworks }) => {
         {artworks.map((artwork) => (
           <li key={`${artwork.source}-${artwork.id}`} className="artwork-item">
             <Link to={`/artwork/${artwork.source}/${artwork.id}`}>
-              <div className="artwork-image">
-                <img src={artwork.image} alt={artwork.title} />
-              </div>
-              <div className="artwork-details">
+              <img src={artwork.image} alt={artwork.title} />
+              <div className="details">
                 <h2>{artwork.title}</h2>
                 <p>{artwork.artist}</p>
                 <p>{artwork.date}</p>

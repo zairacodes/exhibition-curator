@@ -113,7 +113,7 @@ footer a {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.artwork-image img {
+.artwork-item img {
   width: 150px;
   height: auto;
   max-height: 200px;
@@ -122,19 +122,19 @@ footer a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.artwork-details {
+.artwork-item .details {
   flex-grow: 1;
   text-align: left;
 }
 
-.artwork-details h2 {
+.artwork-item .details h2 {
   font-size: 1.5rem;
   margin: 0;
   color: #222;
   overflow-wrap: break-word;
 }
 
-.artwork-details p {
+.artwork-item .details p {
   margin: 0.5rem 0;
   color: #555;
   font-size: 1rem;
@@ -209,10 +209,27 @@ footer a {
 .search-bar input {
   padding: 8px;
   width: 80%;
+  font-size: 1rem;
 }
 
 .search-bar button {
-  margin: 2px;
+  margin: 4px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+/* Collection filter */
+.collection-filter {
+  margin: 1rem 0;
+}
+
+.collection-filter label {
+  margin-right: 1rem;
+}
+
+.collection-filter select {
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 /* Error page */
