@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { fetchArtworkById } from "../utils/artworkApi";
+import ArtworkExhibitionToggle from "../components/ArtworkExhibitionToggle";
 import Error from "./Error";
 
 const ArtworkDetail = () => {
@@ -45,6 +46,7 @@ const ArtworkDetail = () => {
         <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
         <p>{artwork.credit}</p>
         <p>{artwork.museum}</p>
+        <ArtworkExhibitionToggle artwork={artwork} />
       </div>
     </section>
   );
