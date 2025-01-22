@@ -24,6 +24,7 @@ export const fetchAicArtworks = async (
 
       return {
         id: artwork.id,
+        source: "aic",
         image: artwork.image_id
           ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
           : "/placeholder.png",
