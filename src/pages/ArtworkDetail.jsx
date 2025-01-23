@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { fetchArtworkById } from "../utils/artworkApi";
@@ -10,6 +10,7 @@ const ArtworkDetail = () => {
   const [artwork, setArtwork] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArtwork = async () => {
@@ -36,6 +37,7 @@ const ArtworkDetail = () => {
 
   return (
     <section className="artwork-detail">
+      <button onClick={() => navigate(-1)}>Go Back</button>
       <img src={artwork.image} alt={artwork.title} />
       <div className="details">
         <h1>{artwork.title}</h1>
