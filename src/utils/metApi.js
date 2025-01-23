@@ -24,6 +24,7 @@ export const fetchMetArtworks = async (
       const artwork = response.data;
       return {
         id: artwork.objectID,
+        source: "met",
         image:
           artwork.primaryImageSmall ||
           artwork.primaryImage ||

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import ArtworkExhibitionToggle from "./ArtworkExhibitionToggle";
 
 const ArtworkList = ({ artworks }) => {
   return (
@@ -14,6 +15,7 @@ const ArtworkList = ({ artworks }) => {
                 <p>{artwork.date}</p>
               </div>
             </Link>
+            <ArtworkExhibitionToggle artwork={artwork} />
           </li>
         ))}
       </ul>
