@@ -50,22 +50,6 @@ const MyExhibitions = () => {
     localStorage.setItem("exhibitions", JSON.stringify(updatedExhibitions));
   };
 
-  const handleRemoveArtwork = (artworkId, exhibitionId) => {
-    const updatedExhibitions = exhibitions.map((exhibition) => {
-      if (exhibition.id === exhibitionId) {
-        return {
-          ...exhibition,
-          artworks: exhibition.artworks.filter(
-            (artwork) => artwork.id !== artworkId
-          ),
-        };
-      }
-      return exhibition;
-    });
-    setExhibitions(updatedExhibitions);
-    localStorage.setItem("exhibitions", JSON.stringify(updatedExhibitions));
-  };
-
   return (
     <div className="myexhibitions">
       <h1>My Exhibitions</h1>
@@ -86,39 +70,22 @@ const MyExhibitions = () => {
           <ul>
             {exhibitions.map((exhibition) => (
               <li key={exhibition.id} className="exhibition-item">
-                <h2>{exhibition.name}</h2>
+                <Link to={`/exhibition/${exhibition.id}`}>
+                  <h2>{exhibition.name}</h2>
+                </Link>
+                <p className="details">
+                  {exhibition.artworks.length > 0
+                    ? `${exhibition.artworks.length} artwork${
+                        exhibition.artworks.length > 1 ? "s" : ""
+                      }`
+                    : "Empty"}
+                </p>
                 <button
                   className="remove-exhibition"
                   onClick={() => handleRemoveExhibition(exhibition.id)}
                 >
                   Delete Exhibition
                 </button>
-                <ul>
-                  {exhibition.artworks.length === 0 ? (
-                    <p>No artworks in this exhibition.</p>
-                  ) : (
-                    exhibition.artworks.map((artwork) => (
-                      <li key={artwork.id} className="artwork-item">
-                        <Link to={`/artwork/${artwork.source}/${artwork.id}`}>
-                          <img src={artwork.image} alt={artwork.title} />
-                          <div className="details">
-                            <h2>{artwork.title}</h2>
-                            <p>{artwork.artist}</p>
-                            <p>{artwork.date}</p>
-                          </div>
-                        </Link>
-                        <button
-                          className="remove-btn"
-                          onClick={() =>
-                            handleRemoveArtwork(artwork.id, exhibition.id)
-                          }
-                        >
-                          Remove from Exhibition
-                        </button>
-                      </li>
-                    ))
-                  )}
-                </ul>
               </li>
             ))}
           </ul>
