@@ -29,12 +29,17 @@ const ExhibitionDetail = () => {
 
   return (
     <section className="exhibition-detail">
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <button
+        onClick={() => navigate(-1)}
+        aria-label="Go back to previous page"
+      >
+        Go Back
+      </button>
       <h1>{exhibition.name}</h1>
       {exhibition.artworks.length === 0 ? (
         <p>No artworks in this exhibition.</p>
       ) : (
-        <ul className="artwork-list">
+        <ul className="artwork-list" aria-label="Artworks in this exhibition">
           {exhibition.artworks.map((artwork) => (
             <li key={artwork.id} className="artwork-item">
               <Link to={`/artwork/${artwork.source}/${artwork.id}`}>

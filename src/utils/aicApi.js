@@ -33,7 +33,7 @@ export const fetchAicArtworks = async (
         date: artwork.date_display || "Date Unknown",
         medium: artwork.medium_display || "Medium Unknown",
         dimensions: artwork.dimensions || "Dimensions Unknown",
-        description: artwork.description || "Description Not Available",
+        description: artwork.description || "No Description Available",
         credit: artwork.credit_line || "Credit Information Not Available",
         museum: AIC_MUSEUM_NAME,
       };

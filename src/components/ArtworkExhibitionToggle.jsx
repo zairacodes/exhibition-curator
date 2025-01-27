@@ -74,12 +74,17 @@ const ArtworkExhibitionToggle = ({ artwork }) => {
   }
 
   return (
-    <div className="artwork-exhibition-toggle">
+    <section className="artwork-exhibition-toggle">
+      <label htmlFor={`exhibition-select-${artwork.source}-${artwork.id}`}>
+        Select Exhibition:
+      </label>
       <select
+        id={`exhibition-select-${artwork.source}-${artwork.id}`}
         value={selectedExhibitionId || ""}
         onChange={(e) => setSelectedExhibitionId(e.target.value)}
+        aria-invalid={!selectedExhibitionId}
       >
-        <option value="">Select Exhibition</option>
+        <option value="">Choose an exhibition</option>
         {exhibitions.map((exhibition) => (
           <option key={exhibition.id} value={exhibition.id}>
             {exhibition.name}
@@ -90,10 +95,15 @@ const ArtworkExhibitionToggle = ({ artwork }) => {
         className={isInExhibition ? "remove-btn" : "add-btn"}
         onClick={toggleArtworkInExhibition}
         disabled={!selectedExhibitionId}
+        aria-label={
+          isInExhibition
+            ? "Remove artwork from selected exhibition"
+            : "Add artwork to selected exhibition"
+        }
       >
         {isInExhibition ? "Remove from Exhibition" : "Add to Exhibition"}
       </button>
-    </div>
+    </section>
   );
 };
 

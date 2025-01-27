@@ -37,17 +37,42 @@ const ArtworkDetail = () => {
 
   return (
     <section className="artwork-detail">
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <button
+        onClick={() => navigate(-1)}
+        aria-label="Go back to previous page"
+      >
+        Go Back
+      </button>
       <img src={artwork.image} alt={artwork.title} />
       <div className="details">
         <h1>{artwork.title}</h1>
-        <h2>{artwork.artist}</h2>
-        <h2>{artwork.date}</h2>
-        <p>{artwork.medium}</p>
-        <p>{artwork.dimensions}</p>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
-        <p>{artwork.credit}</p>
-        <p>{artwork.museum}</p>
+        <h2>
+          <span className="info-label">Artist:</span>
+          {artwork.artist}
+        </h2>
+        <h2>
+          <span className="info-label">Date:</span>
+          {artwork.date}
+        </h2>
+        <p>
+          <span className="info-label">Medium:</span>
+          {artwork.medium}
+        </p>
+        <p>
+          <span className="info-label">Dimensions:</span>
+          {artwork.dimensions}
+        </p>
+        <p>
+          <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+        </p>
+        <p>
+          <span className="info-label">Credit:</span>
+          {artwork.credit}
+        </p>
+        <p>
+          <span className="info-label"></span>
+          {artwork.museum}
+        </p>
         <ArtworkExhibitionToggle artwork={artwork} />
       </div>
     </section>

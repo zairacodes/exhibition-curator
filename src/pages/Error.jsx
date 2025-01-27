@@ -2,13 +2,17 @@ import { Link } from "react-router";
 
 const Error = ({ error }) => {
   return (
-    <div className="error-page">
+    <section className="error-page" role="alert">
       <h1>Error</h1>
       <p>{error || "An error occurred or you've entered an invalid URL."}</p>
       <p>
-        Please try again later or <Link to="/">go back to homepage</Link>.
+        Please try again later or{" "}
+        <Link to="/" aria-label="Return to homepage">
+          go back to homepage
+        </Link>
+        .
       </p>
-    </div>
+    </section>
   );
 };
 

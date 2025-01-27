@@ -51,17 +51,23 @@ const MyExhibitions = () => {
   };
 
   return (
-    <div className="myexhibitions">
+    <section className="myexhibitions">
       <h1>My Exhibitions</h1>
       <form className="create-exhibition" onSubmit={handleCreateExhibition}>
         <input
+          id="new-exhibition-name"
           type="text"
           placeholder="New Exhibition Name"
           value={newExhibitionName}
           onChange={(e) => setNewExhibitionName(e.target.value)}
+          aria-required="true"
         />
         <button type="submit">Create Exhibition</button>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="error-message" role="alert">
+            {errorMessage}
+          </p>
+        )}
       </form>
       <section className="exhibition-list">
         {exhibitions.length === 0 ? (
@@ -83,6 +89,7 @@ const MyExhibitions = () => {
                 <button
                   className="remove-exhibition"
                   onClick={() => handleRemoveExhibition(exhibition.id)}
+                  aria-label={`Delete exhibition: ${exhibition.name}`}
                 >
                   Delete Exhibition
                 </button>
@@ -91,7 +98,7 @@ const MyExhibitions = () => {
           </ul>
         )}
       </section>
-    </div>
+    </section>
   );
 };
 

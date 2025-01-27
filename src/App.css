@@ -175,6 +175,10 @@ footer a {
   margin-bottom: 8px;
 }
 
+.artwork-detail .info-label {
+  margin-right: 0.2rem;
+}
+
 /* Pagination */
 .pagination {
   display: flex;

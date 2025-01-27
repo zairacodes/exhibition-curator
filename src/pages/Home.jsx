@@ -170,7 +170,7 @@ const Home = () => {
   if (error) return <Error error={error} />;
 
   return (
-    <div className="homepage">
+    <main className="homepage">
       <h1>
         {selectedCollection === "All Collections"
           ? "Artworks"
@@ -184,19 +184,24 @@ const Home = () => {
         }}
       />
       <ArtworkList artworks={artworks} />
-      <div className="pagination">
+      <nav className="pagination" aria-label="Pagination">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1 || !!error}
+          aria-label="Go to previous page"
         >
           Previous
         </button>
-        <span>Page {currentPage}</span>
-        <button onClick={handleNext} disabled={!!error}>
+        <span aria-current="page">Page {currentPage}</span>
+        <button
+          onClick={handleNext}
+          disabled={!!error}
+          aria-label="Go to next page"
+        >
           Next
         </button>
-      </div>
-    </div>
+      </nav>
+    </main>
   );
 };
 
