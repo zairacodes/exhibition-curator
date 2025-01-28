@@ -77,15 +77,15 @@ const MyExhibitions = () => {
             {exhibitions.map((exhibition) => (
               <li key={exhibition.id} className="exhibition-item">
                 <Link to={`/exhibition/${exhibition.id}`}>
-                  <h2>{exhibition.name}</h2>
+                  <p className="details">
+                    <h2>{exhibition.name}</h2>
+                    {exhibition.artworks.length > 0
+                      ? `${exhibition.artworks.length} artwork${
+                          exhibition.artworks.length > 1 ? "s" : ""
+                        }`
+                      : "Empty"}
+                  </p>
                 </Link>
-                <p className="details">
-                  {exhibition.artworks.length > 0
-                    ? `${exhibition.artworks.length} artwork${
-                        exhibition.artworks.length > 1 ? "s" : ""
-                      }`
-                    : "Empty"}
-                </p>
                 <button
                   className="remove-exhibition"
                   onClick={() => handleRemoveExhibition(exhibition.id)}

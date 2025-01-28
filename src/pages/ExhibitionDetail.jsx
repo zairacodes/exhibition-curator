@@ -30,6 +30,7 @@ const ExhibitionDetail = () => {
   return (
     <section className="exhibition-detail">
       <button
+        className="go-back-btn"
         onClick={() => navigate(-1)}
         aria-label="Go back to previous page"
       >

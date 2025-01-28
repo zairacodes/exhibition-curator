@@ -63,18 +63,18 @@ footer a {
   font-style: italic;
 }
 
-/* Homepage */
-.homepage {
+/* Home and MyExhibitions pages */
+.homepage, .myexhibitions {
   padding: 2rem;
 }
 
-.homepage h1 {
+.homepage h1, .myexhibitions h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
 /* Artworks */
-.artwork-list ul {
+.artwork-list ul, .exhibition-detail ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -147,6 +147,8 @@ footer a {
   flex-direction: row;
   align-items: center;
   gap: 20px;
+  position: relative;
+  padding-top: 3rem;
 }
 
 .artwork-detail img {
@@ -179,6 +181,270 @@ footer a {
   margin-right: 0.2rem;
 }
 
+/* Search bar and create exhibition forms */
+.search-bar,
+.create-exhibition {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.search-bar input,
+.create-exhibition input {
+  flex-grow: 1;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  min-width: 200px;
+}
+
+.search-bar button,
+.create-exhibition button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.search-bar button {
+  background-color: #222;
+}
+
+.search-bar button:hover {
+  background-color: #444;
+}
+
+/* Artwork exhibition toggle and create exhibition green buttons */
+.create-exhibition button,
+.artwork-exhibition-toggle .add-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.create-exhibition button:hover,
+.artwork-exhibition-toggle .add-btn:hover {
+  background-color: #218838;
+}
+
+/* Collection filter */
+.collection-filter {
+  margin: 1rem 0;
+}
+
+.collection-filter label {
+  margin-right: 1rem;
+}
+
+.collection-filter select {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+/* MyExhibitions page */
+.exhibition-list ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exhibition-item a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.exhibition-item {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.exhibition-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.myexhibitions h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 0.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.exhibition-item .details {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.exhibition-item .details h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #222;
+  overflow-wrap: break-word;
+}
+
+.exhibition-item .details p {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.exhibition-item .remove-exhibition {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.exhibition-item .remove-exhibition:hover {
+  background-color: #c82333;
+}
+
+/* Individual exhibition */
+.exhibition-detail {
+  margin: 2rem;
+  padding: 2rem;
+  position: relative;
+  padding-top: 3rem;
+}
+
+.exhibition-detail h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Go back buttons */
+.artwork-detail .go-back-btn, .exhibition-detail .go-back-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.artwork-detail .go-back-btn:hover, .exhibition-detail .go-back-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Artwork exhibition toggle */
+.artwork-exhibition-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.artwork-item .artwork-exhibition-toggle {
+  min-width: 250px;
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+}
+
+.artwork-detail .artwork-exhibition-toggle {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.artwork-exhibition-toggle label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+
+.artwork-exhibition-toggle select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.artwork-exhibition-toggle select:focus {
+  outline: none;
+  border-color: #222;
+}
+
+.artwork-exhibition-toggle button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.artwork-exhibition-toggle .remove-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.artwork-exhibition-toggle .remove-btn:hover {
+  background-color: #c82333;
+}
+
+.artwork-exhibition-toggle button:disabled {
+  background-color: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.artwork-exhibition-toggle .go-to-exhibitions {
+  background-color: #222;
+  color: #fff;
+}
+
+.artwork-exhibition-toggle .go-to-exhibitions:hover {
+  background-color: #444;
+}
+
 /* Pagination */
 .pagination {
   display: flex;
@@ -209,34 +475,113 @@ footer a {
   cursor: not-allowed;
 }
 
-/* Search bar */
-.search-bar input {
-  padding: 8px;
-  width: 80%;
-  font-size: 1rem;
-}
-
-.search-bar button {
-  margin: 4px;
-  padding: 8px;
-  font-size: 1rem;
-}
-
-/* Collection filter */
-.collection-filter {
-  margin: 1rem 0;
-}
-
-.collection-filter label {
-  margin-right: 1rem;
-}
-
-.collection-filter select {
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
 /* Error page */
 .error-page h1 {
   font-size: 2.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .artwork-detail {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .artwork-detail img {
+    width: 80%;
+    margin-bottom: 1.5rem;
+  }
+
+  .artwork-detail .details {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+  }
+
+  .artwork-detail {
+    margin: 1rem;
+  }
+
+  .artwork-detail img {
+    width: 100%;
+  }
+
+  .exhibition-item {
+    padding: 1rem;
+  }
+
+  .exhibition-item h2 {
+    font-size: 1.2rem;
+  }
+
+  .artwork-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .artwork-item a {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artwork-item img {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 1rem;
+  }
+
+  .artwork-item .details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .artwork-item .details h2 {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .artwork-item .details p {
+    font-size: 0.9rem;
+  }
+
+  .exhibition-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .search-bar,
+  .create-exhibition {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .search-bar input,
+  .create-exhibition input {
+    width: 100%;
+  }
+
+  .search-bar button,
+  .create-exhibition button {
+    width: 100%;
+  }
+
+  .artwork-item .artwork-exhibition-toggle {
+    width: 100%;
+    min-width: unset;
+    margin-top: 1rem;
+  }
+
+  .artwork-exhibition-toggle select,
+  .artwork-exhibition-toggle button {
+    width: 100%;
+  }
 }
