@@ -25,10 +25,9 @@ const SearchBar = ({ onSearch }) => {
           placeholder="Type a keyword to find artworks..."
           aria-label="Search for artworks"
           aria-required="true"
+          required
         />
-        <button type="submit" disabled={!query.trim()}>
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
     </section>
   );

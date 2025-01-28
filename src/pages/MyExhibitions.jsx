@@ -37,8 +37,6 @@ const MyExhibitions = () => {
       localStorage.setItem("exhibitions", JSON.stringify(updatedExhibitions));
       setNewExhibitionName("");
       setErrorMessage("");
-    } else {
-      setErrorMessage("Exhibition name cannot be empty.");
     }
   };
 
@@ -61,6 +59,7 @@ const MyExhibitions = () => {
           value={newExhibitionName}
           onChange={(e) => setNewExhibitionName(e.target.value)}
           aria-required="true"
+          required
         />
         <button type="submit">Create Exhibition</button>
         {errorMessage && (
@@ -77,14 +76,14 @@ const MyExhibitions = () => {
             {exhibitions.map((exhibition) => (
               <li key={exhibition.id} className="exhibition-item">
                 <Link to={`/exhibition/${exhibition.id}`}>
-                  <p className="details">
+                  <div className="details">
                     <h2>{exhibition.name}</h2>
                     {exhibition.artworks.length > 0
                       ? `${exhibition.artworks.length} artwork${
                           exhibition.artworks.length > 1 ? "s" : ""
                         }`
                       : "Empty"}
-                  </p>
+                  </div>
                 </Link>
                 <button
                   className="remove-exhibition"

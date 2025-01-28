@@ -64,16 +64,13 @@ const ArtworkDetail = () => {
           {artwork.dimensions}
         </p>
         <p>
-          <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+          <span dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
         </p>
         <p>
           <span className="info-label">Credit:</span>
           {artwork.credit}
         </p>
-        <p>
-          <span className="info-label"></span>
-          {artwork.museum}
-        </p>
+        <p className="info-label">{artwork.museum}</p>
         <ArtworkExhibitionToggle artwork={artwork} />
       </div>
     </section>
