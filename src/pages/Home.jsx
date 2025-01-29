@@ -147,6 +147,7 @@ const Home = () => {
         query: searchQuery,
         collection: selectedCollection,
       });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -158,6 +159,7 @@ const Home = () => {
         query: searchQuery,
         collection: selectedCollection,
       });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -170,9 +172,13 @@ const Home = () => {
   if (error) return <Error error={error} />;
 
   return (
-    <div className="homepage">
+    <main className="homepage">
       <h1>
-        {selectedCollection === "All Collections"
+        {searchQuery && selectedCollection !== "All Collections"
+          ? `Artworks found for "${searchQuery}" from the ${selectedCollection}`
+          : searchQuery
+          ? `Artworks found for "${searchQuery}"`
+          : selectedCollection === "All Collections"
           ? "Artworks"
           : `Artworks from the ${selectedCollection}`}
       </h1>
@@ -184,19 +190,24 @@ const Home = () => {
         }}
       />
       <ArtworkList artworks={artworks} />
-      <div className="pagination">
+      <nav className="pagination" aria-label="Pagination">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1 || !!error}
+          aria-label="Go to previous page"
         >
           Previous
         </button>
-        <span>Page {currentPage}</span>
-        <button onClick={handleNext} disabled={!!error}>
+        <span aria-current="page">Page {currentPage}</span>
+        <button
+          onClick={handleNext}
+          disabled={!!error}
+          aria-label="Go to next page"
+        >
           Next
         </button>
-      </div>
-    </div>
+      </nav>
+    </main>
   );
 };
 

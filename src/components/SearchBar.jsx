@@ -15,17 +15,21 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="Type a keyword to find artworks..."
-      />
-      <button type="submit" disabled={!query.trim()}>
-        Search
-      </button>
-    </form>
+    <section className="search-bar">
+      <form className="search-bar" onSubmit={handleSubmit}>
+        <input
+          id="search-input"
+          type="search"
+          value={query}
+          onChange={handleInputChange}
+          placeholder="Type a keyword to find artworks..."
+          aria-label="Search for artworks"
+          aria-required="true"
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+    </section>
   );
 };
 

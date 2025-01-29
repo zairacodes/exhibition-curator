@@ -37,17 +37,47 @@ const ArtworkDetail = () => {
 
   return (
     <section className="artwork-detail">
-      <button onClick={() => navigate(-1)}>Go Back</button>
-      <img src={artwork.image} alt={artwork.title} />
+      <button
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        aria-label="Go back to previous page"
+      >
+        Go Back
+      </button>
+      <img
+        src={artwork.image}
+        alt={
+          artwork.image.includes("placeholder.png")
+            ? "Image for this artwork is unavailable, possibly due to copyright restrictions or missing data."
+            : artwork.title
+        }
+      />
       <div className="details">
         <h1>{artwork.title}</h1>
-        <h2>{artwork.artist}</h2>
-        <h2>{artwork.date}</h2>
-        <p>{artwork.medium}</p>
-        <p>{artwork.dimensions}</p>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
-        <p>{artwork.credit}</p>
-        <p>{artwork.museum}</p>
+        <h2>
+          <span className="info-label">Artist:</span>
+          {artwork.artist}
+        </h2>
+        <h2>
+          <span className="info-label">Date:</span>
+          {artwork.date}
+        </h2>
+        <p>
+          <span className="info-label">Medium:</span>
+          {artwork.medium}
+        </p>
+        <p>
+          <span className="info-label">Dimensions:</span>
+          {artwork.dimensions}
+        </p>
+        <p>
+          <span dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+        </p>
+        <p>
+          <span className="info-label">Credit:</span>
+          {artwork.credit}
+        </p>
+        <p className="info-label">{artwork.museum}</p>
         <ArtworkExhibitionToggle artwork={artwork} />
       </div>
     </section>

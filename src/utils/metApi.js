@@ -29,12 +29,12 @@ export const fetchMetArtworks = async (
           artwork.primaryImageSmall ||
           artwork.primaryImage ||
           "/placeholder.png",
-        title: artwork.title || "Title Unknown",
-        artist: artwork.artistDisplayName || "Artist Unknown",
-        date: artwork.objectDate || "Date Unknown",
-        medium: artwork.medium || "Medium Unknown",
-        dimensions: artwork.dimensions || "Dimensions Unknown",
-        credit: artwork.creditLine || "Credit Information Not Available",
+        title: artwork.title || "unknown",
+        artist: artwork.artistDisplayName || "unknown",
+        date: artwork.objectDate || "unknown",
+        medium: artwork.medium || "unknown",
+        dimensions: artwork.dimensions || "not available",
+        credit: artwork.creditLine,
         museum: MET_MUSEUM_NAME,
       };
     }

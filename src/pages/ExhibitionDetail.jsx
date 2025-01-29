@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import Error from "./Error";
+import ArtworkItem from "../components/ArtworkItem";
 
 const ExhibitionDetail = () => {
   const { id } = useParams();
@@ -29,23 +30,26 @@ const ExhibitionDetail = () => {
 
   return (
     <section className="exhibition-detail">
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <button
+        className="go-back-btn"
+        onClick={() => navigate(-1)}
+        aria-label="Go back to previous page"
+      >
+        Go Back
+      </button>
       <h1>{exhibition.name}</h1>
       {exhibition.artworks.length === 0 ? (
-        <p>No artworks in this exhibition.</p>
+        <p>
+          No artworks in this exhibition. Add some from the{" "}
+          <Link to="/" aria-label="Go to homepage">
+            homepage
+          </Link>
+          !
+        </p>
       ) : (
-        <ul className="artwork-list">
+        <ul className="artwork-list" aria-label="Artworks in this exhibition">
           {exhibition.artworks.map((artwork) => (
-            <li key={artwork.id} className="artwork-item">
-              <Link to={`/artwork/${artwork.source}/${artwork.id}`}>
-                <img src={artwork.image} alt={artwork.title} />
-                <div className="details">
-                  <h2>{artwork.title}</h2>
-                  <p>{artwork.artist}</p>
-                  <p>{artwork.date}</p>
-                </div>
-              </Link>
-            </li>
+            <ArtworkItem key={artwork.id} artwork={artwork} />
           ))}
         </ul>
       )}

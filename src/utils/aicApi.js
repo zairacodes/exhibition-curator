@@ -28,13 +28,13 @@ export const fetchAicArtworks = async (
         image: artwork.image_id
           ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
           : "/placeholder.png",
-        title: artwork.title || "Title Unknown",
-        artist: artwork.artist_title || "Artist Unknown",
-        date: artwork.date_display || "Date Unknown",
-        medium: artwork.medium_display || "Medium Unknown",
-        dimensions: artwork.dimensions || "Dimensions Unknown",
-        description: artwork.description || "Description Not Available",
-        credit: artwork.credit_line || "Credit Information Not Available",
+        title: artwork.title || "unknown",
+        artist: artwork.artist_title || "unknown",
+        date: artwork.date_display || "unknown",
+        medium: artwork.medium_display || "unknown",
+        dimensions: artwork.dimensions || "not available",
+        description: artwork.description,
+        credit: artwork.credit_line,
         museum: AIC_MUSEUM_NAME,
       };
     }

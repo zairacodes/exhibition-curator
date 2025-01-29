@@ -37,8 +37,6 @@ const MyExhibitions = () => {
       localStorage.setItem("exhibitions", JSON.stringify(updatedExhibitions));
       setNewExhibitionName("");
       setErrorMessage("");
-    } else {
-      setErrorMessage("Exhibition name cannot be empty.");
     }
   };
 
@@ -51,18 +49,25 @@ const MyExhibitions = () => {
   };
 
   return (
-    <div className="myexhibitions">
+    <section className="myexhibitions">
       <h1>My Exhibitions</h1>
       <form className="create-exhibition" onSubmit={handleCreateExhibition}>
         <input
+          id="new-exhibition-name"
           type="text"
           placeholder="New Exhibition Name"
           value={newExhibitionName}
           onChange={(e) => setNewExhibitionName(e.target.value)}
+          aria-required="true"
+          required
         />
         <button type="submit">Create Exhibition</button>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
+      {errorMessage && (
+        <p className="error-message" role="alert">
+          {errorMessage}
+        </p>
+      )}
       <section className="exhibition-list">
         {exhibitions.length === 0 ? (
           <p>No exhibitions created yet. Start by creating one!</p>
@@ -71,18 +76,19 @@ const MyExhibitions = () => {
             {exhibitions.map((exhibition) => (
               <li key={exhibition.id} className="exhibition-item">
                 <Link to={`/exhibition/${exhibition.id}`}>
-                  <h2>{exhibition.name}</h2>
+                  <div className="details">
+                    <h2>{exhibition.name}</h2>
+                    {exhibition.artworks.length > 0
+                      ? `${exhibition.artworks.length} artwork${
+                          exhibition.artworks.length > 1 ? "s" : ""
+                        }`
+                      : "Empty"}
+                  </div>
                 </Link>
-                <p className="details">
-                  {exhibition.artworks.length > 0
-                    ? `${exhibition.artworks.length} artwork${
-                        exhibition.artworks.length > 1 ? "s" : ""
-                      }`
-                    : "Empty"}
-                </p>
                 <button
                   className="remove-exhibition"
                   onClick={() => handleRemoveExhibition(exhibition.id)}
+                  aria-label={`Delete exhibition: ${exhibition.name}`}
                 >
                   Delete Exhibition
                 </button>
@@ -91,7 +97,7 @@ const MyExhibitions = () => {
           </ul>
         )}
       </section>
-    </div>
+    </section>
   );
 };
 
