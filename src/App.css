@@ -1,20 +1,48 @@
+/* Spacing Variables */
+:root {
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+/* Color Variables */
+:root {
+  --color-primary: #2c3e50;
+  --color-secondary: #8e8c84;
+  --color-accent: #4a6277;
+  --color-background: #f4f4f4;
+  --color-text: #333;
+  --color-text-light: #555;
+  --color-border: #ddd;
+  --color-white: #fff;
+  --color-red: #dc3545;
+  --color-red-hover: #c82333;
+  --color-green: #28a745;
+  --color-green-hover: #218838;
+}
+
 /* General Container */
 .app {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--spacing-lg);
   text-align: center;
+  background-color: var(--color-background);
+  font-family: 'Georgia', serif;
 }
 
 /* Header */
 header {
-  padding: 1rem;
-  background-color: #222;
-  color: #fff;
+  padding: var(--spacing-sm);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
 }
 
 header h1 {
@@ -28,9 +56,9 @@ nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   padding: 0;
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
 }
 
 nav ul li {
@@ -38,39 +66,44 @@ nav ul li {
 }
 
 nav a {
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
   font-size: 1.2rem;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   transition: background-color 0.3s, color 0.3s;
 }
 
 nav a:hover {
-  background-color: #444;
+  background-color: var(--color-accent);
   border-radius: 5px;
 }
 
 /* Footer */
 footer {
-  padding: 1rem;
-  background-color: #222;
-  color: #fff;
+  padding: var(--spacing-sm);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: 'Arial', sans-serif;
 }
 
 footer a {
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
   font-style: italic;
 }
 
+footer a:hover {
+  text-decoration: underline;
+}
+
 /* Home and MyExhibitions pages */
 .homepage, .myexhibitions {
-  padding: 2rem;
+  padding: var(--spacing-lg);
 }
 
 .homepage h1, .myexhibitions h1 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 /* Artworks */
@@ -80,14 +113,14 @@ footer a {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
 }
 
 .artwork-item a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
   width: 100%;
   text-decoration: none;
   color: inherit;
@@ -95,16 +128,16 @@ footer a {
 
 .artwork-item {
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
-  border: 1px solid #eee;
+  gap: var(--spacing-md);
+  border: 1px solid var(--color-border);
   border-radius: 10px;
-  padding: 1rem;
-  background-color: #f9f9f9;
+  padding: var(--spacing-sm);
+  background-color: var(--color-white);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -130,25 +163,25 @@ footer a {
 .artwork-item .details h2 {
   font-size: 1.5rem;
   margin: 0;
-  color: #222;
+  color: var(--color-text);
   overflow-wrap: break-word;
 }
 
 .artwork-item .details p {
-  margin: 0.5rem 0;
-  color: #555;
+  margin: var(--spacing-xs) 0;
+  color: var(--color-text-light);
   font-size: 1rem;
 }
 
-/* Individual artwork */
+/* Individual Artwork page */
 .artwork-detail {
   display: flex;
-  margin: 2rem;
+  margin: var(--spacing-lg);
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: var(--spacing-md);
   position: relative;
-  padding-top: 3rem;
+  padding-top: var(--spacing-xl);
 }
 
 .artwork-detail img {
@@ -164,48 +197,48 @@ footer a {
 
 .artwork-detail .details h1 {
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .artwork-detail .details h2 {
   font-size: 1.5rem;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-xs);
 }
 
 .artwork-detail .details p {
   font-size: 1.1rem;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-xs);
 }
 
 .artwork-detail .info-label {
-  margin-right: 0.2rem;
+  margin-right: var(--spacing-xs);
 }
 
-/* Search bar and create exhibition forms */
+/* Search Bar and Create Exhibition forms */
 .search-bar,
 .create-exhibition {
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
 
 .search-bar input,
 .create-exhibition input {
   flex-grow: 1;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 5px;
   min-width: 200px;
 }
 
 .search-bar button,
 .create-exhibition button {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  color: #fff;
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -214,36 +247,41 @@ footer a {
 }
 
 .search-bar button {
-  background-color: #222;
+  background-color: var(--color-primary);
 }
 
 .search-bar button:hover {
-  background-color: #444;
+  background-color: var(--color-accent);
 }
 
-/* Artwork exhibition toggle and create exhibition green buttons */
+/* Artwork Exhibition Toggle and Create Exhibition green buttons */
 .create-exhibition button,
 .artwork-exhibition-toggle .add-btn {
-  background-color: #28a745;
-  color: #fff;
+  background-color: var(--color-green);
+  color: var(--color-white);
 }
 
 .create-exhibition button:hover,
 .artwork-exhibition-toggle .add-btn:hover {
-  background-color: #218838;
+  background-color: var(--color-green-hover);
 }
 
-/* Collection filter */
+.add-btn:disabled:hover {
+  background-color: var(--color-background);
+  cursor: not-allowed;
+}
+
+/* Collection Filter */
 .collection-filter {
-  margin: 1rem 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .collection-filter label {
-  margin-right: 1rem;
+  margin-right: var(--spacing-sm);
 }
 
 .collection-filter select {
-  padding: 0.5rem;
+  padding: var(--spacing-xs);
   font-size: 1rem;
 }
 
@@ -251,17 +289,17 @@ footer a {
 .exhibition-list ul {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
 }
 
 .exhibition-item a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
   width: 100%;
   text-decoration: none;
   color: inherit;
@@ -269,16 +307,16 @@ footer a {
 
 .exhibition-item {
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1.5rem;
-  border: 1px solid #eee;
+  gap: var(--spacing-md);
+  border: 1px solid var(--color-border);
   border-radius: 10px;
-  padding: 1rem;
-  background-color: #f9f9f9;
+  padding: var(--spacing-sm);
+  background-color: var(--color-white);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -289,12 +327,12 @@ footer a {
 
 .myexhibitions h1 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 .error-message {
-  color: #dc3545;
-  margin-top: 0.5rem;
+  color: var(--color-red);
+  margin-top: var(--spacing-xs);
   text-align: center;
   width: 100%;
 }
@@ -307,21 +345,21 @@ footer a {
 .exhibition-item .details h2 {
   font-size: 1.5rem;
   margin: 0;
-  color: #222;
+  color: var(--color-text);
   overflow-wrap: break-word;
 }
 
 .exhibition-item .details p {
-  margin: 0.5rem 0;
-  color: #555;
+  margin: var(--spacing-xs) 0;
+  color: var(--color-text-light);
   font-size: 1rem;
 }
 
 .exhibition-item .remove-exhibition {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  background-color: #dc3545;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -329,53 +367,53 @@ footer a {
 }
 
 .exhibition-item .remove-exhibition:hover {
-  background-color: #c82333;
+  background-color: var(--color-red-hover);
 }
 
-/* Individual exhibition */
+/* Individual Exhibition page */
 .exhibition-detail {
-  margin: 2rem;
-  padding: 2rem;
+  margin: var(--spacing-lg);
+  padding: var(--spacing-lg);
   position: relative;
-  padding-top: 3rem;
+  padding-top: var(--spacing-xl);
 }
 
 .exhibition-detail h1 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
   text-align: center;
 }
 
-/* Go back buttons */
+/* Go Back buttons */
 .artwork-detail .go-back-btn, .exhibition-detail .go-back-btn {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-text);
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
   transition: background-color 0.3s, color 0.3s;
 }
 
 .artwork-detail .go-back-btn:hover, .exhibition-detail .go-back-btn:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
-/* Artwork exhibition toggle */
+/* Artwork Exhibition Toggle */
 .artwork-exhibition-toggle {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  background-color: var(--color-white);
   border-radius: 5px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
 }
 
 .artwork-item .artwork-exhibition-toggle {
@@ -383,37 +421,37 @@ footer a {
   margin-left: auto;
   background-color: transparent;
   border: none;
-  padding: 0.5rem;
+  padding: var(--spacing-xs);
 }
 
 .artwork-detail .artwork-exhibition-toggle {
   width: 100%;
   max-width: 800px;
-  margin: 2rem auto 0;
+  margin: var(--spacing-lg) auto 0;
 }
 
 .artwork-exhibition-toggle label {
   font-size: 1rem;
-  color: #555;
-  margin-bottom: 0.2rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
 }
 
 .artwork-exhibition-toggle select {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 5px;
-  background-color: #fff;
+  background-color: var(--color-white);
   cursor: pointer;
 }
 
 .artwork-exhibition-toggle select:focus {
   outline: none;
-  border-color: #222;
+  border-color: var(--color-primary);
 }
 
 .artwork-exhibition-toggle button {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -422,56 +460,56 @@ footer a {
 }
 
 .artwork-exhibition-toggle .remove-btn {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
 
 .artwork-exhibition-toggle .remove-btn:hover {
-  background-color: #c82333;
+  background-color: var(--color-red-hover);
 }
 
 .artwork-exhibition-toggle button:disabled {
-  background-color: #eee;
-  color: #999;
+  background-color: var(--color-background);
+  color: var(--color-text-light);
   cursor: not-allowed;
 }
 
 .artwork-exhibition-toggle .go-to-exhibitions {
-  background-color: #222;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .artwork-exhibition-toggle .go-to-exhibitions:hover {
-  background-color: #444;
+  background-color: var(--color-accent);
 }
 
 /* Pagination */
 .pagination {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
 }
 
 .pagination button {
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: 1rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-text);
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination button:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .pagination button:disabled {
-  background-color: #eee;
-  color: #aaa;
+  background-color: var(--color-background);
+  color: var(--color-text-light);
   cursor: not-allowed;
 }
 
@@ -486,12 +524,12 @@ footer a {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 1rem;
+    margin: var(--spacing-sm);
   }
 
   .artwork-detail img {
     width: 80%;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-md);
   }
 
   .artwork-detail .details {
@@ -501,11 +539,11 @@ footer a {
 
 @media (max-width: 768px) {
   .app {
-    padding: 1rem;
+    padding: var(--spacing-sm);
   }
 
   .artwork-detail {
-    margin: 1rem;
+    margin: var(--spacing-sm);
   }
 
   .artwork-detail img {
@@ -513,7 +551,7 @@ footer a {
   }
 
   .exhibition-item {
-    padding: 1rem;
+    padding: var(--spacing-sm);
   }
 
   .exhibition-item h2 {
@@ -524,7 +562,7 @@ footer a {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
   }
 
   .artwork-item a {
@@ -535,7 +573,7 @@ footer a {
   .artwork-item img {
     width: 100%;
     max-width: 250px;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
   }
 
   .artwork-item .details {
@@ -545,7 +583,7 @@ footer a {
 
   .artwork-item .details h2 {
     font-size: 1.2rem;
-    margin-top: 0.5rem;
+    margin-top: var(--spacing-xs);
   }
 
   .artwork-item .details p {
@@ -555,13 +593,13 @@ footer a {
   .exhibition-item {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: var(--spacing-sm);
   }
 
   .search-bar,
   .create-exhibition {
     flex-direction: column;
-    padding: 0 1rem;
+    padding: 0 var(--spacing-sm);
   }
 
   .search-bar input,
@@ -577,7 +615,7 @@ footer a {
   .artwork-item .artwork-exhibition-toggle {
     width: 100%;
     min-width: unset;
-    margin-top: 1rem;
+    margin-top: var(--spacing-sm);
   }
 
   .artwork-exhibition-toggle select,
