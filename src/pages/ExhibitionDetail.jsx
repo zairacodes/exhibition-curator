@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import Error from "./Error";
 import ArtworkItem from "../components/ArtworkItem";
 
@@ -39,7 +39,13 @@ const ExhibitionDetail = () => {
       </button>
       <h1>{exhibition.name}</h1>
       {exhibition.artworks.length === 0 ? (
-        <p>No artworks in this exhibition.</p>
+        <p>
+          No artworks in this exhibition. Add some from the{" "}
+          <Link to="/" aria-label="Go to homepage">
+            homepage
+          </Link>
+          !
+        </p>
       ) : (
         <ul className="artwork-list" aria-label="Artworks in this exhibition">
           {exhibition.artworks.map((artwork) => (

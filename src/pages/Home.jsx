@@ -147,6 +147,7 @@ const Home = () => {
         query: searchQuery,
         collection: selectedCollection,
       });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -158,6 +159,7 @@ const Home = () => {
         query: searchQuery,
         collection: selectedCollection,
       });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -172,7 +174,11 @@ const Home = () => {
   return (
     <main className="homepage">
       <h1>
-        {selectedCollection === "All Collections"
+        {searchQuery && selectedCollection !== "All Collections"
+          ? `Artworks found for "${searchQuery}" from the ${selectedCollection}`
+          : searchQuery
+          ? `Artworks found for "${searchQuery}"`
+          : selectedCollection === "All Collections"
           ? "Artworks"
           : `Artworks from the ${selectedCollection}`}
       </h1>

@@ -62,12 +62,12 @@ const MyExhibitions = () => {
           required
         />
         <button type="submit">Create Exhibition</button>
-        {errorMessage && (
-          <p className="error-message" role="alert">
-            {errorMessage}
-          </p>
-        )}
       </form>
+      {errorMessage && (
+        <p className="error-message" role="alert">
+          {errorMessage}
+        </p>
+      )}
       <section className="exhibition-list">
         {exhibitions.length === 0 ? (
           <p>No exhibitions created yet. Start by creating one!</p>

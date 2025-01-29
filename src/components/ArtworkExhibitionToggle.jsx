@@ -65,7 +65,11 @@ const ArtworkExhibitionToggle = ({ artwork }) => {
   if (exhibitions.length === 0) {
     return (
       <div className="artwork-exhibition-toggle">
-        <p>No exhibitions available. Please create one first.</p>
+        <p>
+          No exhibitions created yet.
+          <br />
+          Start by creating one!
+        </p>
         <button onClick={handleNoExhibitions} className="go-to-exhibitions">
           Go to My Exhibitions
         </button>
