@@ -44,7 +44,14 @@ const ArtworkDetail = () => {
       >
         Go Back
       </button>
-      <img src={artwork.image} alt={artwork.title} />
+      <img
+        src={artwork.image}
+        alt={
+          artwork.image.includes("placeholder.png")
+            ? "Image for this artwork is unavailable, possibly due to copyright restrictions or missing data."
+            : artwork.title
+        }
+      />
       <div className="details">
         <h1>{artwork.title}</h1>
         <h2>
