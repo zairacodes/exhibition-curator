@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Error from "./Error";
+import ArtworkItem from "../components/ArtworkItem";
 
 const ExhibitionDetail = () => {
   const { id } = useParams();
@@ -42,23 +43,7 @@ const ExhibitionDetail = () => {
       ) : (
         <ul className="artwork-list" aria-label="Artworks in this exhibition">
           {exhibition.artworks.map((artwork) => (
-            <li key={artwork.id} className="artwork-item">
-              <Link to={`/artwork/${artwork.source}/${artwork.id}`}>
-                <img
-                  src={artwork.image}
-                  alt={
-                    artwork.image.includes("placeholder.png")
-                      ? "Image for this artwork is unavailable, possibly due to copyright restrictions or missing data."
-                      : artwork.title
-                  }
-                />
-                <div className="details">
-                  <h2>{artwork.title}</h2>
-                  <p>{artwork.artist}</p>
-                  <p>{artwork.date}</p>
-                </div>
-              </Link>
-            </li>
+            <ArtworkItem key={artwork.id} artwork={artwork} />
           ))}
         </ul>
       )}
