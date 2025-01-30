@@ -11,6 +11,15 @@ const axiosWithLimit = axiosRateLimit(axios, {
   perMilliseconds: 1000,
 });
 
+const isImageAvailable = async (imageUrl) => {
+  try {
+    const response = await axios.head(imageUrl);
+    return response.status === 200;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const fetchAicArtworks = async (
   page,
   itemsPerPage,
@@ -22,12 +31,17 @@ export const fetchAicArtworks = async (
       const response = await axiosWithLimit.get(`${AIC_BASE_URL}/${id}`);
       const artwork = response.data.data;
 
+      const imageUrl = artwork.image_id
+        ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
+        : "/placeholder.png";
+
+      const imageAvailable = await isImageAvailable(imageUrl);
+      const image = imageAvailable ? imageUrl : "/placeholder.png";
+
       return {
         id: artwork.id,
         source: "aic",
-        image: artwork.image_id
-          ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
-          : "/placeholder.png",
+        image,
         title: artwork.title || "unknown",
         artist: artwork.artist_title || "unknown",
         date: artwork.date_display || "unknown",
@@ -59,16 +73,24 @@ export const fetchAicArtworks = async (
       return [];
     }
 
-    const aicArtworks = response.data.data.map((artwork) => ({
-      id: artwork.id,
-      source: "aic",
-      image: artwork.image_id
-        ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
-        : "/placeholder.png",
-      title: artwork.title || "Title Unknown",
-      artist: artwork.artist_title || "Artist Unknown",
-      date: artwork.date_display || "Date Unknown",
-    }));
+    const aicArtworks = await Promise.all(
+      response.data.data.map(async (artwork) => {
+        const imageUrl = artwork.image_id
+          ? `${AIC_IMG_URL}/${artwork.image_id}/full/843,/0/default.jpg`
+          : "/placeholder.png";
+        const imageAvailable = await isImageAvailable(imageUrl);
+        const image = imageAvailable ? imageUrl : "/placeholder.png";
+
+        return {
+          id: artwork.id,
+          source: "aic",
+          image,
+          title: artwork.title || "Title Unknown",
+          artist: artwork.artist_title || "Artist Unknown",
+          date: artwork.date_display || "Date Unknown",
+        };
+      })
+    );
 
     return aicArtworks;
   } catch (error) {
