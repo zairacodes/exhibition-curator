@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { fetchArtworkById } from "../utils/artworkApi";
 import ArtworkExhibitionToggle from "../components/ArtworkExhibitionToggle";
+import ArtworkDetailLoading from "../components/ArtworkDetailLoading";
 import Error from "./Error";
 
 const ArtworkDetail = () => {
@@ -30,7 +31,7 @@ const ArtworkDetail = () => {
     fetchArtwork();
   }, [source, id]);
 
-  if (loading) return <div>Loading artwork details...</div>;
+  if (loading) return <ArtworkDetailLoading />;
   if (error) return <Error error={error} />;
 
   const sanitizedDescription = DOMPurify.sanitize(artwork.description);
