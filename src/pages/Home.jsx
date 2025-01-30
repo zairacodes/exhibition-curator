@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router";
 import { fetchMetArtworks } from "../utils/metApi";
 import { fetchAicArtworks } from "../utils/aicApi";
 import ArtworkList from "../components/ArtworkList";
+import ArtworkListLoading from "../components/ArtworkListLoading";
 import SearchBar from "../components/SearchBar";
 import CollectionFilter from "../components/CollectionFilter";
 import Error from "./Error";
@@ -168,7 +169,7 @@ const Home = () => {
     prefetchNextPages(currentPage, searchQuery, selectedCollection);
   }, [currentPage, searchQuery, selectedCollection]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <ArtworkListLoading />;
   if (error) return <Error error={error} />;
 
   return (
