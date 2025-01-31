@@ -20,6 +20,7 @@ const ArtworkDetail = () => {
       try {
         const data = await fetchArtworkById(source, id);
         setArtwork(data);
+        window.scrollTo(0, 0);
       } catch (err) {
         setError(err.message);
         console.error(err);
